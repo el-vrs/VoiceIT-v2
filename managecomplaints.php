@@ -61,7 +61,7 @@ $stmt->execute();
 $result = $stmt->get_result();
 
 // ── STATUS COUNTS for summary bar (SELECT GROUP BY) ──────
-$counts = ['Submitted' => 0, 'Pending' => 0, 'Resolved' => 0, 'Decline' => 0];
+$counts = ['Submitted' => 0, 'Pending' => 0, 'Resolved' => 0, 'Declined' => 0];
 $count_res = $conn->query("SELECT status, COUNT(*) as c FROM complaints GROUP BY status");
 while ($r = $count_res->fetch_assoc()) {
     $s = trim($r['status']);
@@ -77,7 +77,7 @@ $total = array_sum($counts);
   <title>VoiceIT | Manage Complaints</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Candal&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="css/managecomplaints.css?v=4">
+  <link rel="stylesheet" href="css/managecomplaints.css?v=3">
 </head>
 <body>
   <nav class="sidebar">
@@ -149,7 +149,7 @@ $total = array_sum($counts);
             <option value="Submitted" <?= $status_filter==='Submitted' ? 'selected':'' ?>>Submitted</option>
             <option value="Pending"   <?= $status_filter==='Pending'   ? 'selected':'' ?>>Pending</option>
             <option value="Resolved"  <?= $status_filter==='Resolved'  ? 'selected':'' ?>>Resolved</option>
-            <option value="Decline"  <?= $status_filter==='Decline'  ? 'selected':'' ?>>Decline</option>
+            <option value="Declined"  <?= $status_filter==='Declined'  ? 'selected':'' ?>>Declined</option>
           </select>
           <label>Category</label>
           <select id="categoryFilter" onchange="updateFilters()">
@@ -179,9 +179,9 @@ $total = array_sum($counts);
         <span class="summary-num"><?= $counts['Resolved'] ?></span>
         <span class="summary-label">Resolved</span>
       </div>
-      <div class="summary-item declined" onclick="quickFilter('Decline')">
-        <span class="summary-num"><?= $counts['Decline'] ?></span>
-        <span class="summary-label">Decline</span>
+      <div class="summary-item declined" onclick="quickFilter('Declined')">
+        <span class="summary-num"><?= $counts['Declined'] ?></span>
+        <span class="summary-label">Declined</span>
       </div>
     </div>
 
@@ -272,7 +272,7 @@ $total = array_sum($counts);
             <button type="button" class="status-pick submitted" onclick="setStatus('Submitted')">Submitted</button>
             <button type="button" class="status-pick pending"   onclick="setStatus('Pending')">Pending</button>
             <button type="button" class="status-pick resolved"  onclick="setStatus('Resolved')">Resolved</button>
-            <button type="button" class="status-pick decline" onclick="setStatus('Decline')">Decline</button>
+            <button type="button" class="status-pick decline"  onclick="setStatus('Decline')">Decline</button>
           </div>
           <input type="hidden" name="status" id="m_status_hidden">
         </div>

@@ -15,8 +15,6 @@ $student_number = $_SESSION['student_number'];
 $conn = new mysqli("voiceit-mysql-alc-verse0.e.aivencloud.com", "avnadmin", "AVNS_5DUZvHNyRl6Ou_Tb5Bf", "voiceit", 10458);
 $conn->ssl_set(NULL, NULL, __DIR__ . "/ca.pem", NULL, NULL);
 if ($conn->connect_error) die("Connection failed: " . $conn->connect_error);
-    if ($conn->connect_error) die("Connection failed: " . $conn->connect_error);
-}
 
 // Status counts
 $status_counts = ['Submitted' => 0, 'Pending' => 0, 'Resolved' => 0, 'Decline' => 0];

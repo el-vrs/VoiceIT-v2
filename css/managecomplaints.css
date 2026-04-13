@@ -145,7 +145,7 @@ body { font-family: var(--font); background: var(--bg); color: var(--text); disp
 .summary-item.submitted { border-top: 3px solid #3b82f6; }
 .summary-item.pending   { border-top: 3px solid #f59e0b; }
 .summary-item.resolved  { border-top: 3px solid #10b981; }
-.summary-item.declined  { border-top: 3px solid var(--red); }
+.summary-item.declined, .summary-item.decline  { border-top: 3px solid var(--red); }
 
 /* ── FLASH MSG ── */
 .flash-msg {
@@ -278,7 +278,7 @@ body { font-family: var(--font); background: var(--bg); color: var(--text); disp
 .status-pick.active, .status-pick.submitted.active { background: #3b82f6; color: white; border-color: #3b82f6; }
 .status-pick.pending.active  { background: #f59e0b; color: white; border-color: #f59e0b; }
 .status-pick.resolved.active { background: #10b981; color: white; border-color: #10b981; }
-.status-pick.decline.active { background: var(--red); color: white; border-color: var(--red); }
+.status-pick.declined.active, .status-pick.decline.active { background: var(--red); color: white; border-color: var(--red); }
 
 /* Delete proof button */
 .btn-delete-proof {
