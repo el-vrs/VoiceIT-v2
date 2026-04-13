@@ -6,9 +6,12 @@ if (!isset($_SESSION['student_number'])) {
 }
 $student_number = $_SESSION['student_number'];
 
+// Role-based DB user (voiceit_student_user) — falls back to root if not yet set up
 $conn = new mysqli("voiceit-mysql-alc-verse0.e.aivencloud.com", "avnadmin", "AVNS_5DUZvHNyRl6Ou_Tb5Bf", "voiceit", 10458);
-$conn->ssl_set(NULL, NULL, __DIR__ . '/ca.pem', NULL, NULL);
+$conn->ssl_set(NULL, NULL, __DIR__ . "/ca.pem", NULL, NULL);
 if ($conn->connect_error) die("Connection failed: " . $conn->connect_error);
+    if ($conn->connect_error) die("Connection failed: " . $conn->connect_error);
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -189,15 +192,15 @@ if ($conn->connect_error) die("Connection failed: " . $conn->connect_error);
       const remarks = this.dataset.remarks;
       document.getElementById('modalProof').innerHTML = proof
         ? `<p style="font-size:0.82em;font-weight:600;margin-bottom:6px;font-family:'Inter',sans-serif;">Resolution Proof:</p>
-           <img src="/voiceit/${proof}" style="max-width:100%;border-radius:8px;margin-bottom:6px;border:1px solid #e0e0e0;">
+           <img src="${proof}" style="max-width:100%;border-radius:8px;margin-bottom:6px;border:1px solid #e0e0e0;">
            ${remarks ? `<p style="font-size:0.79em;color:#666;font-style:italic;font-family:'Inter',sans-serif;">${remarks}</p>` : ''}`
         : '';
 
       const evidence = this.dataset.evidence;
       document.getElementById('modalEvidence').innerHTML = evidence
         ? (evidence.match(/\.(jpg|jpeg|png|gif)$/i)
-            ? `<p style="font-size:0.82em;font-weight:600;margin-bottom:6px;margin-top:10px;font-family:'Inter',sans-serif;">Your Evidence:</p><img src="/voiceit/${evidence}" style="max-width:100%;border-radius:8px;border:1px solid #e0e0e0;">`
-            : `<a href="/voiceit/${evidence}" target="_blank" style="font-size:0.83em;color:#1a4a7a;font-weight:600;font-family:'Inter',sans-serif;">View Attached File ↗</a>`)
+            ? `<p style="font-size:0.82em;font-weight:600;margin-bottom:6px;margin-top:10px;font-family:'Inter',sans-serif;">Your Evidence:</p><img src="${evidence}" style="max-width:100%;border-radius:8px;border:1px solid #e0e0e0;">`
+            : `<a href="${evidence}" target="_blank" style="font-size:0.83em;color:#1a4a7a;font-weight:600;font-family:'Inter',sans-serif;">View Attached File ↗</a>`)
         : `<p style="font-size:0.79em;color:#aaa;font-style:italic;margin-top:8px;font-family:'Inter',sans-serif;">No evidence attached</p>`;
 
       modal.style.display = 'flex';

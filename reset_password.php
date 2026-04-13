@@ -3,8 +3,10 @@ session_start();
 
 // Database connection details 
 $conn = new mysqli("voiceit-mysql-alc-verse0.e.aivencloud.com", "avnadmin", "AVNS_5DUZvHNyRl6Ou_Tb5Bf", "voiceit", 10458);
-$conn->ssl_set(NULL, NULL, __DIR__ . '/ca.pem', NULL, NULL);
-if ($conn->connect_error) die("Connection failed: " . $conn->connect_error);
+$conn->ssl_set(NULL, NULL, __DIR__ . "/ca.pem", NULL, NULL);
+if ($conn->connect_error) {
+    die("Connection failed: " . $conn->connect_error);
+}
 
 $error_message = "";
 $success_message = "";
@@ -12,7 +14,7 @@ $show_form = false;
 $token = $_GET['token'] ?? null;
 $user_email = null;
 
-//TOKEN VALIDATION 
+//TOKEN VALIDATION (On page load) ---
 if ($token) {
     // Check if token exists and is not expired
     $sql = "SELECT email, token_expiry FROM users WHERE reset_token = ?";

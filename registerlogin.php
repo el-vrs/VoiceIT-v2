@@ -32,9 +32,9 @@ function sendResetEmail($email, $token) {
         $mail->isHTML(true);
         $mail->Subject = 'VoiceIT Password Reset Request';
         $mail->Body    = "<h2>Password Reset Request</h2><p>Click below to reset your password:</p>
-                          <a href='http://{$_SERVER['HTTP_HOST']}/voiceit/reset_password.php?token=$token'>Reset Password</a>
+                          <a href='http://{$_SERVER['HTTP_HOST']}reset_password.php?token=$token'>Reset Password</a>
                           <p>This link expires in 1 hour.</p>";
-        $mail->AltBody = "Reset your password: http://{$_SERVER['HTTP_HOST']}/voiceit/reset_password.php?token=$token";
+        $mail->AltBody = "Reset your password: http://{$_SERVER['HTTP_HOST']}reset_password.php?token=$token";
         $mail->send();
         return true;
     } catch (Exception $e) {
@@ -273,10 +273,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
           .then(r => r.text()).then(text => {
             if (text.includes("✅ ADMIN")) {
               displayMessage("Login successful. Redirecting...", 'success');
-              setTimeout(() => { window.location.href = '/voiceit/admindashboard.php'; }, 1500);
+              setTimeout(() => { window.location.href = 'admindashboard.php'; }, 1500);
             } else if (text.includes("✅ STUDENT")) {
               displayMessage("Login successful. Welcome!", 'success');
-              setTimeout(() => { window.location.href = '/voiceit/userdashboard.php'; }, 1500);
+              setTimeout(() => { window.location.href = 'userdashboard.php'; }, 1500);
             } else {
               displayMessage(text, 'error');
             }
@@ -297,7 +297,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         fetch('registerlogin.php', { method: 'POST', body: new FormData(this) })
           .then(r => r.text()).then(text => {
             displayMessage(text, text.includes("✅") ? 'success' : 'error');
-            if (text.includes("✅")) setTimeout(() => { window.location.href = '/voiceit/admindashboard.php'; }, 1500);
+            if (text.includes("✅")) setTimeout(() => { window.location.href = 'admindashboard.php'; }, 1500);
           });
       });
     }

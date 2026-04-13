@@ -6,7 +6,6 @@ $dbname     = "voiceit";
 $port       = 10458;
 
 $conn = new mysqli($servername, $username, $password, $dbname, $port);
-
 $conn->ssl_set(NULL, NULL, __DIR__ . '/ca.pem', NULL, NULL);
 
 if ($conn->connect_error) {

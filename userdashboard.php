@@ -11,10 +11,12 @@ if (!isset($_SESSION['student_number'])) {
 }
 $student_number = $_SESSION['student_number'];
 
-// Role-based DB user 
+// Role-based DB user (voiceit_student_user) — falls back to root if not yet set up
 $conn = new mysqli("voiceit-mysql-alc-verse0.e.aivencloud.com", "avnadmin", "AVNS_5DUZvHNyRl6Ou_Tb5Bf", "voiceit", 10458);
-$conn->ssl_set(NULL, NULL, __DIR__ . '/ca.pem', NULL, NULL);
+$conn->ssl_set(NULL, NULL, __DIR__ . "/ca.pem", NULL, NULL);
 if ($conn->connect_error) die("Connection failed: " . $conn->connect_error);
+    if ($conn->connect_error) die("Connection failed: " . $conn->connect_error);
+}
 
 // Status counts
 $status_counts = ['Submitted' => 0, 'Pending' => 0, 'Resolved' => 0, 'Decline' => 0];
@@ -232,14 +234,14 @@ $stmt2->close();
 
     document.getElementById('rm_proof').innerHTML = data.proof_image
       ? `<p style="font-size:0.83em;font-weight:600;margin-bottom:6px;">Admin Resolution Proof:</p>
-         <img src="/voiceit/${data.proof_image}" style="max-width:100%;border-radius:8px;margin-bottom:6px;">
+         <img src="${data.proof_image}" style="max-width:100%;border-radius:8px;margin-bottom:6px;">
          ${data.remarks ? `<p style="font-size:0.8em;color:#666;font-style:italic;">${data.remarks}</p>` : ''}`
       : '';
 
     document.getElementById('rm_evidence').innerHTML = data.evidence_file
       ? (data.evidence_file.match(/\.(jpg|jpeg|png|gif)$/i)
-          ? `<p style="font-size:0.83em;font-weight:600;margin-bottom:6px;">Your Uploaded Evidence:</p><img src="/voiceit/${data.evidence_file}" style="max-width:100%;border-radius:8px;">`
-          : `<a href="/voiceit/${data.evidence_file}" target="_blank" style="font-size:0.83em;">View Attached File</a>`)
+          ? `<p style="font-size:0.83em;font-weight:600;margin-bottom:6px;">Your Uploaded Evidence:</p><img src="${data.evidence_file}" style="max-width:100%;border-radius:8px;">`
+          : `<a href="${data.evidence_file}" target="_blank" style="font-size:0.83em;">View Attached File</a>`)
       : '<p style="font-size:0.8em;color:#aaa;font-style:italic;">No evidence attached</p>';
 
     document.getElementById('reportModal').style.display = 'block';

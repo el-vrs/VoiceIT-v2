@@ -5,15 +5,20 @@ if (!isset($_SESSION['admin_id'])) {
     exit();
 }
 
+// Uses role-based DB user (voiceit_admin_user) — run voiceit_roles.sql first
+// Falls back to root if role user not yet set up
 $conn = new mysqli("voiceit-mysql-alc-verse0.e.aivencloud.com", "avnadmin", "AVNS_5DUZvHNyRl6Ou_Tb5Bf", "voiceit", 10458);
-$conn->ssl_set(NULL, NULL, __DIR__ . '/ca.pem', NULL, NULL);
+$conn->ssl_set(NULL, NULL, __DIR__ . "/ca.pem", NULL, NULL);
 if ($conn->connect_error) die("Connection failed: " . $conn->connect_error);
+    if ($conn->connect_error) die("Connection failed: " . $conn->connect_error);
+}
 
 $sort_filter   = $_GET['sort']     ?? 'latest';
 $status_filter = $_GET['status']   ?? 'All';
 $category_filter = $_GET['category'] ?? 'All';
 $search        = trim($_GET['search'] ?? '');
 
+// ── BUILD QUERY (SELECT with filters) ────────────────────
 $where_parts = [];
 $params      = [];
 $types       = '';
@@ -332,7 +337,7 @@ $total = array_sum($counts);
     // Evidence
     if (d.evidence_file) {
       document.getElementById('m_evidence').innerHTML =
-        `<a href="/voiceit/${d.evidence_file}" target="_blank" class="evidence-link"><i class="fas fa-paperclip"></i> View Evidence</a>`;
+        `<a href="${d.evidence_file}" target="_blank" class="evidence-link"><i class="fas fa-paperclip"></i> View Evidence</a>`;
     } else {
       document.getElementById('m_evidence').textContent = 'No file uploaded.';
     }
@@ -349,7 +354,7 @@ $total = array_sum($counts);
       if (d.proof_image) {
         proofBlk.style.display = 'block';
         proofBlk.innerHTML = `<p class="detail-label">Current Proof:</p>
-          <a href="/voiceit/${d.proof_image}" target="_blank" class="evidence-link">
+          <a href="${d.proof_image}" target="_blank" class="evidence-link">
             <i class="fas fa-image"></i> View Current Proof</a>
           ${d.proof_remarks ? `<p style="font-size:0.78em;color:#666;margin-top:4px;">${d.proof_remarks}</p>` : ''}`;
         proofBtn.style.display = 'inline-flex';

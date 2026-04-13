@@ -5,16 +5,19 @@ if (!isset($_SESSION['admin_id'])) {
     exit();
 }
 
-$conn = new mysqli("voiceit-mysql-alc-verse0.e.aivencloud.com", "avnadmin", "AVNS_5DUZvHNyRl6Ou_Tb5Bf", "voiceit, 10458);
-$conn->ssl_set(NULL, NULL, __DIR__ . '/ca.pem', NULL, NULL);
+// Role-based DB user (voiceit_admin_user) — falls back to root if not yet set up
+$conn = new mysqli("voiceit-mysql-alc-verse0.e.aivencloud.com", "avnadmin", "AVNS_5DUZvHNyRl6Ou_Tb5Bf", "voiceit", 10458);
+$conn->ssl_set(NULL, NULL, __DIR__ . "/ca.pem", NULL, NULL);
 if ($conn->connect_error) die("Connection failed: " . $conn->connect_error);
+    if ($conn->connect_error) die("Connection failed: " . $conn->connect_error);
+}
 
-//FILTERS 
+// ── FILTERS ──────────────────────────────────────────────
 $search          = trim($_GET['search']   ?? '');
 $category_filter = $_GET['category']      ?? 'All';
 $status_filter   = $_GET['status']        ?? 'All';
 
-//SELECT: students with complaint counts 
+// ── SELECT: students with complaint counts ────────────────
 $where_parts = [];
 $params      = [];
 $types       = '';
@@ -28,6 +31,7 @@ if ($search !== '') {
 
 $where_sql = count($where_parts) ? 'HAVING ' . implode(' AND ', $where_parts) : '';
 
+// Note: HAVING used here because search applies to user fields in aggregate query
 $sql_students = "SELECT
     users.student_number,
     users.full_name,
@@ -42,7 +46,7 @@ $sql_students = "SELECT
   GROUP BY users.student_number, users.full_name, users.email
   ORDER BY total_complaints DESC";
 
-// Apply search as a post-filter in PHP 
+// Apply search as a post-filter in PHP (simpler with HAVING on aliased cols)
 $result_students = $conn->query($sql_students);
 $students = [];
 while ($s = $result_students->fetch_assoc()) {
@@ -53,7 +57,7 @@ while ($s = $result_students->fetch_assoc()) {
     $students[] = $s;
 }
 
-//SELECT: detail for chosen student
+// ── SELECT: detail for chosen student ────────────────────
 $selected_student    = null;
 $student_complaints  = [];
 
@@ -98,7 +102,7 @@ if (isset($_GET['student_number'])) {
     $stmt2->close();
 }
 
-// COUNT by category (SELECT COUNT GROUP BY)
+// ── COUNT by category (SELECT COUNT GROUP BY) ─────────────
 $cat_counts = ['Academic' => 0, 'Non-Academic' => 0];
 $cat_res = $conn->query("SELECT category, COUNT(*) as c FROM complaints GROUP BY category");
 while ($r = $cat_res->fetch_assoc()) $cat_counts[$r['category']] = (int)$r['c'];
@@ -291,7 +295,7 @@ while ($r = $cat_res->fetch_assoc()) $cat_counts[$r['category']] = (int)$r['c'];
             <?php if (!empty($c['proof_image'])): ?>
               <div class="complaint-block proof">
                 <strong>Resolution Proof:</strong>
-                <a href="/voiceit/<?= htmlspecialchars($c['proof_image']) ?>" target="_blank" class="evidence-link">
+                <a href="<?= htmlspecialchars($c['proof_image']) ?>" target="_blank" class="evidence-link">
                   <i class="fas fa-image"></i> View Proof
                 </a>
                 <?php if (!empty($c['proof_remarks'])): ?>
@@ -302,7 +306,7 @@ while ($r = $cat_res->fetch_assoc()) $cat_counts[$r['category']] = (int)$r['c'];
             <?php if (!empty($c['evidence_file'])): ?>
               <div class="complaint-block evidence">
                 <strong>Student Evidence:</strong>
-                <a href="/voiceit/<?= htmlspecialchars($c['evidence_file']) ?>" target="_blank" class="evidence-link">
+                <a href="<?= htmlspecialchars($c['evidence_file']) ?>" target="_blank" class="evidence-link">
                   <i class="fas fa-paperclip"></i> View File
                 </a>
               </div>

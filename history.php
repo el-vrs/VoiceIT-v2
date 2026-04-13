@@ -6,10 +6,14 @@ if (!isset($_SESSION['student_number'])) {
 }
 $student_number = $_SESSION['student_number'];
 
+// Role-based DB user (voiceit_student_user) — falls back to root if not yet set up
 $conn = new mysqli("voiceit-mysql-alc-verse0.e.aivencloud.com", "avnadmin", "AVNS_5DUZvHNyRl6Ou_Tb5Bf", "voiceit", 10458);
-$conn->ssl_set(NULL, NULL, __DIR__ . '/ca.pem', NULL, NULL);
+$conn->ssl_set(NULL, NULL, __DIR__ . "/ca.pem", NULL, NULL);
 if ($conn->connect_error) die("Connection failed: " . $conn->connect_error);
+    if ($conn->connect_error) die("Connection failed: " . $conn->connect_error);
+}
 
+// ── Handle UPDATE student_suggestion ─────────────────────
 $update_msg = '';
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action']) && $_POST['action'] === 'edit_suggestion') {
     $complaint_id = intval($_POST['complaint_id'] ?? 0);
@@ -23,7 +27,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action']) && $_POST['
     $verify->close();
 
     if ($cdata) {
-        // UPDATE complaints 
+        // UPDATE complaints SET student_suggestion = ? WHERE complaint_id = ? AND student_number = ?
         $stmt_upd = $conn->prepare("UPDATE complaints SET student_suggestion = ? WHERE complaint_id = ? AND student_number = ?");
         $stmt_upd->bind_param("sis", $suggestion, $complaint_id, $student_number);
         $stmt_upd->execute();
@@ -195,7 +199,7 @@ $conn->close();
             <?php if (!empty($report['proof_image'])): ?>
               <div class="report-proof">
                 <strong>Resolution Proof:</strong>
-                <a href="/voiceit/<?= htmlspecialchars($report['proof_image']) ?>" target="_blank" class="proof-link">
+                <a href="<?= htmlspecialchars($report['proof_image']) ?>" target="_blank" class="proof-link">
                   <i class="fas fa-image"></i> View Proof
                 </a>
                 <?php if (!empty($report['proof_remarks'])): ?>
