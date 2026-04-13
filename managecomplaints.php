@@ -149,7 +149,7 @@ $total = array_sum($counts);
             <option value="Submitted" <?= $status_filter==='Submitted' ? 'selected':'' ?>>Submitted</option>
             <option value="Pending"   <?= $status_filter==='Pending'   ? 'selected':'' ?>>Pending</option>
             <option value="Resolved"  <?= $status_filter==='Resolved'  ? 'selected':'' ?>>Resolved</option>
-            <option value="Decline"  <?= $status_filter==='Declined'  ? 'selected':'' ?>>Decline</option>
+            <option value="Decline"  <?= $status_filter==='Decline'  ? 'selected':'' ?>>Decline</option>
           </select>
           <label>Category</label>
           <select id="categoryFilter" onchange="updateFilters()">
@@ -179,7 +179,7 @@ $total = array_sum($counts);
         <span class="summary-num"><?= $counts['Resolved'] ?></span>
         <span class="summary-label">Resolved</span>
       </div>
-      <div class="summary-item declined" onclick="quickFilter('Declined')">
+      <div class="summary-item declined" onclick="quickFilter('Decline')">
         <span class="summary-num"><?= $counts['Decline'] ?></span>
         <span class="summary-label">Decline</span>
       </div>
@@ -272,7 +272,7 @@ $total = array_sum($counts);
             <button type="button" class="status-pick submitted" onclick="setStatus('Submitted')">Submitted</button>
             <button type="button" class="status-pick pending"   onclick="setStatus('Pending')">Pending</button>
             <button type="button" class="status-pick resolved"  onclick="setStatus('Resolved')">Resolved</button>
-            <button type="button" class="status-pick declined" onclick="setStatus('Decline')">Decline</button>
+            <button type="button" class="status-pick declined"  onclick="setStatus('Decline')">Decline</button>
           </div>
           <input type="hidden" name="status" id="m_status_hidden">
         </div>

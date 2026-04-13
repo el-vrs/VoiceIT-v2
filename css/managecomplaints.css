@@ -196,7 +196,7 @@ body { font-family: var(--font); background: var(--bg); color: var(--text); disp
 }
 .status-btn.resolved  { background: #10b981; }
 .status-btn.pending   { background: #f59e0b; }
-.status-btn.declined  { background: var(--red); }
+.status-btn.declined, .status-btn.decline  { background: var(--red); }
 .status-btn.submitted { background: #3b82f6; }
 
 /* Action icon buttons */
