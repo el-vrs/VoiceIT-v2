@@ -241,7 +241,7 @@ body { font-family: var(--font); background: var(--bg); color: var(--text); disp
   width: 180px; height: 180px;
   margin: 12px auto 10px;
 }
-.donut-wrap canvas { display: block; }
+.donut-wrap canvas { display: block; width: 100% !important; height: 100% !important; }
 .donut-center {
   position: absolute; top: 50%; left: 50%;
   transform: translate(-50%, -50%);
