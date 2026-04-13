@@ -278,7 +278,7 @@ body { font-family: var(--font); background: var(--bg); color: var(--text); disp
 .status-pick.active, .status-pick.submitted.active { background: #3b82f6; color: white; border-color: #3b82f6; }
 .status-pick.pending.active  { background: #f59e0b; color: white; border-color: #f59e0b; }
 .status-pick.resolved.active { background: #10b981; color: white; border-color: #10b981; }
-.status-pick.declined.active { background: var(--red); color: white; border-color: var(--red); }
+.status-pick.decline.active { background: var(--red); color: white; border-color: var(--red); }
 
 /* Delete proof button */
 .btn-delete-proof {

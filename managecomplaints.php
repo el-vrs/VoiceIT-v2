@@ -272,7 +272,7 @@ $total = array_sum($counts);
             <button type="button" class="status-pick submitted" onclick="setStatus('Submitted')">Submitted</button>
             <button type="button" class="status-pick pending"   onclick="setStatus('Pending')">Pending</button>
             <button type="button" class="status-pick resolved"  onclick="setStatus('Resolved')">Resolved</button>
-            <button type="button" class="status-pick declined"  onclick="setStatus('Decline')">Decline</button>
+            <button type="button" class="status-pick decline" onclick="setStatus('Decline')">Decline</button>
           </div>
           <input type="hidden" name="status" id="m_status_hidden">
         </div>
