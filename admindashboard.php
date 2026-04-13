@@ -25,7 +25,7 @@ while ($row = $result->fetch_assoc()) {
     if (strpos($status, 'submitted') !== false)                                     $status_counts['submitted'] = $row['count'];
     elseif (strpos($status, 'pending') !== false || strpos($status, 'in progress') !== false) $status_counts['pending'] += $row['count'];
     elseif (strpos($status, 'resolved') !== false)                                  $status_counts['resolved'] = $row['count'];
-    elseif (strpos($status, 'declined') !== false)                                  $status_counts['declined'] = $row['count'];
+    elseif (strpos($status, 'decline') !== false)                                $status_counts['declined'] = $row['count'];
 }
 
 // Recent reports — fetch full detail for modal
