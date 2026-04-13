@@ -70,12 +70,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['reset_password_submit
             $stmt_update->bind_param("ss", $hashedPassword, $submitted_token);
 
             if ($stmt_update->execute()) {
-                // Check if any rows were actually affected
-                if ($stmt_update->affected_rows === 1) { // ✅ Use === 1 for strict success
+                if ($stmt_update->affected_rows >= 1) {
                     $success_message = "Your password has been successfully reset. You can now log in.";
-                    $show_form = false; // Hide the form after success
+                    $show_form = false;
                 } else {
-                    // This error is now the *only* way a failed update is handled.
                     $error_message = "❌ Password reset failed: Token was not found during the final update (token likely expired or already used).";
                 }
             } else {
@@ -122,7 +120,7 @@ $conn->close();
                 <?php endif; ?>
 
                 <?php if ($show_form): ?>
-                    <form method="POST">
+                    <form method="POST" action="reset_password.php?token=<?= urlencode($token) ?>">
                         <div class="form-group">
                             <label for="new-password">New Password</label>
                             <input type="password" id="new-password" name="new_password" required>

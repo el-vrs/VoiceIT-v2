@@ -32,9 +32,9 @@ function sendResetEmail($email, $token) {
         $mail->isHTML(true);
         $mail->Subject = 'VoiceIT Password Reset Request';
         $mail->Body    = "<h2>Password Reset Request</h2><p>Click below to reset your password:</p>
-                          <a href='http://{$_SERVER['HTTP_HOST']}reset_password.php?token=$token'>Reset Password</a>
+                          <a href='http://{$_SERVER['HTTP_HOST']}/reset_password.php?token=$token'>Reset Password</a>
                           <p>This link expires in 1 hour.</p>";
-        $mail->AltBody = "Reset your password: http://{$_SERVER['HTTP_HOST']}reset_password.php?token=$token";
+        $mail->AltBody = "Reset your password: http://{$_SERVER['HTTP_HOST']}/reset_password.php?token=$token";
         $mail->send();
         return true;
     } catch (Exception $e) {
