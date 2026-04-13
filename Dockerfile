@@ -1,21 +1,14 @@
-FROM php:8.2-apache
+FROM php:8.2-cli
 
-# Enable mysqli and pdo_mysql extensions
+# Install mysqli extension
 RUN docker-php-ext-install mysqli pdo_mysql
 
-# Enable Apache mod_rewrite
-RUN a2enmod rewrite
-
-# Disable conflicting MPM modules and enable prefork
-RUN a2dismod mpm_event mpm_worker || true && a2enmod mpm_prefork || true
+# Set working directory
+WORKDIR /app
 
 # Copy project files
-COPY . /var/www/html/
+COPY . /app/
 
-# Set working directory
-WORKDIR /var/www/html
+EXPOSE 8080
 
-# Set permissions
-RUN chown -R www-data:www-data /var/www/html
-
-EXPOSE 80
+CMD php -S 0.0.0.0:8080 -t /app
