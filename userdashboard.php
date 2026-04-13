@@ -238,13 +238,13 @@ $stmt2->close();
 
     document.getElementById('rm_proof').innerHTML = data.proof_image
       ? `<p style="font-size:0.83em;font-weight:600;margin-bottom:6px;">Admin Resolution Proof:</p>
-         <img src="${toAbsUrl(data.proof_image)}" style="max-width:100%;border-radius:8px;margin-bottom:6px;">
+         <img src="${data.proof_image}" style="max-width:100%;border-radius:8px;margin-bottom:6px;">
          ${data.remarks ? `<p style="font-size:0.8em;color:#666;font-style:italic;">${data.remarks}</p>` : ''}`
       : '';
 
     document.getElementById('rm_evidence').innerHTML = data.evidence_file
-      ? (data.evidence_file.match(/\.(jpg|jpeg|png|gif)$/i)
-          ? `<p style="font-size:0.83em;font-weight:600;margin-bottom:6px;">Your Uploaded Evidence:</p><img src="${toAbsUrl(data.evidence_file)}" style="max-width:100%;border-radius:8px;">`
+      ? (data.evidence_file.match(/^data:image\//i)
+          ? `<p style="font-size:0.83em;font-weight:600;margin-bottom:6px;">Your Uploaded Evidence:</p><img src="${data.evidence_file}" style="max-width:100%;border-radius:8px;">`
           : `<a href="${data.evidence_file}" target="_blank" style="font-size:0.83em;">View Attached File</a>`)
       : '<p style="font-size:0.8em;color:#aaa;font-style:italic;">No evidence attached</p>';
 

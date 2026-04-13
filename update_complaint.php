@@ -33,14 +33,11 @@ $stmt->close();
 
 // If Resolved, handle proof image upload and INSERT into resolution_proof
 if ($status === 'Resolved' && isset($_FILES['proof_image']) && $_FILES['proof_image']['error'] === UPLOAD_ERR_OK) {
-    $upload_dir = 'uploads/proof/';
-    if (!is_dir($upload_dir)) mkdir($upload_dir, 0755, true);
+    $mime     = mime_content_type($_FILES['proof_image']['tmp_name']);
+    $imgData  = base64_encode(file_get_contents($_FILES['proof_image']['tmp_name']));
+    $filepath = 'data:' . $mime . ';base64,' . $imgData;
 
-    $ext      = pathinfo($_FILES['proof_image']['name'], PATHINFO_EXTENSION);
-    $filename = 'proof_' . $complaint_id . '_' . time() . '.' . $ext;
-    $filepath = $upload_dir . $filename;
-
-    if (move_uploaded_file($_FILES['proof_image']['tmp_name'], $filepath)) {
+    if ($imgData) {
         $remarks = trim($_POST['remarks'] ?? '');
 
         // Check if proof already exists for this complaint (UNIQUE constraint)
