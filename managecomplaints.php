@@ -180,7 +180,7 @@ $total = array_sum($counts);
         <span class="summary-label">Resolved</span>
       </div>
       <div class="summary-item declined" onclick="quickFilter('Declined')">
-        <span class="summary-num"><?= $counts['Declined'] ?></span>
+        <span class="summary-num"><?= $counts['Decline'] ?></span>
         <span class="summary-label">Decline</span>
       </div>
     </div>
