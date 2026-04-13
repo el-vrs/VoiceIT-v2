@@ -19,7 +19,7 @@ if (!$complaint_id || !$status) {
     exit();
 }
 
-$allowed = ['Submitted', 'Pending', 'Resolved', 'Declined'];
+$allowed = ['Submitted', 'Pending', 'Resolved', 'Decline'];
 if (!in_array($status, $allowed)) {
     header("Location: managecomplaints.php?error=invalid_status");
     exit();
