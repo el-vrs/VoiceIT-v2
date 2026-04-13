@@ -8,7 +8,7 @@ if (!isset($_SESSION['admin_id'])) {
 $servername = "voiceit-mysql-alc-verse0.e.aivencloud.com";
 $db_username = "avnadmin";
 $db_password = "AVNS_5DUZvHNyRl6Ou_Tb5Bf";
-$dbname = "defaultdb";
+$dbname = "voiceit";
 $port = 10458;
 
 $conn = new mysqli($servername, $db_username, $db_password, $dbname, $port);

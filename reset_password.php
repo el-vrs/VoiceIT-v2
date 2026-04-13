@@ -2,7 +2,7 @@
 session_start();
 
 // Database connection details 
-$conn = new mysqli("voiceit-mysql-alc-verse0.e.aivencloud.com", "avnadmin", "AVNS_5DUZvHNyRl6Ou_Tb5Bf", "defaultdb", 10458);
+$conn = new mysqli("voiceit-mysql-alc-verse0.e.aivencloud.com", "avnadmin", "AVNS_5DUZvHNyRl6Ou_Tb5Bf", "voiceit", 10458);
 $conn->ssl_set(NULL, NULL, __DIR__ . '/ca.pem', NULL, NULL);
 if ($conn->connect_error) die("Connection failed: " . $conn->connect_error);
 

@@ -6,7 +6,7 @@ use PHPMailer\PHPMailer\Exception;
 
 // ── DB connections using role-based users ─────────────────
 function studentConn() {
-    $c = new mysqli("voiceit-mysql-alc-verse0.e.aivencloud.com", "avnadmin", "AVNS_5DUZvHNyRl6Ou_Tb5Bf", "defaultdb", 10458);
+    $c = new mysqli("voiceit-mysql-alc-verse0.e.aivencloud.com", "avnadmin", "AVNS_5DUZvHNyRl6Ou_Tb5Bf", "voiceit", 10458);
     $c->ssl_set(NULL, NULL, __DIR__ . '/ca.pem', NULL, NULL);
     return $c;
 }
