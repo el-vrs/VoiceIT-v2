@@ -42,6 +42,7 @@ $sql_students = "SELECT
   FROM users
   LEFT JOIN complaints ON users.student_number = complaints.student_number
   GROUP BY users.student_number, users.full_name, users.email
+  HAVING total_complaints > 0
   ORDER BY total_complaints DESC";
 
 // Apply search as a post-filter in PHP (simpler with HAVING on aliased cols)

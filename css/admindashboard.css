@@ -362,8 +362,10 @@ body { font-family: var(--font); background: var(--bg); color: var(--text); disp
   .chart-card  { flex-shrink: 0; }
   .activity-card { flex: none; }
 
-  .donut-wrap { width: 150px; height: 150px; }
+  .donut-wrap { width: 150px; height: 150px; margin: 12px auto 10px; }
   .donut-total { font-size: 1.4em; }
+  .chart-card { width: 100%; box-sizing: border-box; display: flex; flex-direction: column; align-items: center; }
+  .donut-legend { justify-content: center; width: 100%; }
 
   #reportModal > div { width: 95% !important; padding: 20px !important; }
 }
