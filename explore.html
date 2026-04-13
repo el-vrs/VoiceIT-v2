@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Candal&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="css/explore.css">
+  <title>VoiceIT | Explore</title>
+</head>
+<body>
+
+  <header class="navbar">
+    <a href="index.html" class="logo">
+      <img src="visuals/navlogo.gif" alt="VoiceIT">
+    </a>
+    <nav class="nav-links">
+      <a href="index.html">Home</a>
+      <a href="explore.html" class="active">Explore</a>
+      <a href="aboutus.html">About Us</a>
+      <a href="registerlogin.php" class="login-btn">Log In</a>
+    </nav>
+    <button class="hamburger" id="hamburger" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
+    <div class="mobile-dropdown" id="mobileDropdown">
+      <a href="index.html">Home</a>
+      <a href="explore.html" class="active">Explore</a>
+      <a href="aboutus.html">About Us</a>
+      <a href="registerlogin.php" class="mobile-login-btn">Log In</a>
+    </div>
+  </header>
+
+  <div class="page-wrapper">
+
+    <section class="page-hero">
+      <div class="page-hero-inner">
+        <h1>What is VoiceIT?</h1>
+        <p>An online complaint management system that gives every student a direct, secure, and structured way to be heard by school administration.</p>
+      </div>
+      <div class="page-hero-visual">
+        <img src="visuals/vid.gif" alt="VoiceIT Demo">
+      </div>
+    </section>
+
+    <section class="features-section">
+      <div class="features-inner">
+      <div class="feature-card">
+        <div class="feature-icon"><i class="fas fa-lightbulb"></i></div>
+        <h3>Organize Your Thought</h3>
+        <p>Clearly articulate your concerns before sharing them with the community or the school administration.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon"><i class="fas fa-pen"></i></div>
+        <h3>File A Report</h3>
+        <p>Submit reports on any campus concerns or feedback to help improve services, facilities, and the community.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon"><i class="fas fa-chart-bar"></i></div>
+        <h3>Track Your Report</h3>
+        <p>Stay updated with the status of your submitted reports in real-time and see actions being taken.</p>
+      </div>
+    </div>
+    </section>
+
+    <section class="cta-strip">
+      <p>Ready to make your voice heard?</p>
+      <a href="registerlogin.php" class="cta-btn">Get Started</a>
+    </section>
+
+  </div>
+
+  <script>
+    const hamburger = document.getElementById('hamburger');
+    const dropdown = document.getElementById('mobileDropdown');
+    hamburger.addEventListener('click', () => {
+      hamburger.classList.toggle('open');
+      dropdown.classList.toggle('open');
+    });
+    document.addEventListener('click', (e) => {
+      if (!hamburger.contains(e.target) && !dropdown.contains(e.target)) {
+        hamburger.classList.remove('open');
+        dropdown.classList.remove('open');
+      }
+    });
+  </script>
+</body>

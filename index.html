@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Candal&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/homepage.css">
+  <title>VoiceIT | Home</title>
+</head>
+<body>
+
+  <header class="navbar">
+    <a href="index.html" class="nav-logo">
+      <img src="visuals/navlogo.gif" alt="VoiceIT">
+    </a>
+    <nav class="nav">
+      <a href="index.html" class="active">Home</a>
+      <a href="explore.html">Explore</a>
+      <a href="aboutus.html">About Us</a>
+      <a href="registerlogin.php" class="nav-login-btn">Log In</a>
+    </nav>
+    <button class="hamburger" id="hamburger" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
+    <div class="mobile-dropdown" id="mobileDropdown">
+      <a href="index.html" class="active">Home</a>
+      <a href="explore.html">Explore</a>
+      <a href="aboutus.html">About Us</a>
+      <a href="registerlogin.php" class="mobile-login-btn">Log In</a>
+    </div>
+  </header>
+
+  <section class="hero">
+    <div class="hero-bg"><div class="hero-overlay"></div></div>
+    <div class="hero-content">
+      <h1>Raise your voice,<br>make a difference.</h1>
+      <p>See something, say something, improve something.<br>Use VoiceIT to report concerns and shape our campus.</p>
+      <div class="hero-actions">
+        <a href="registerlogin.php" class="btn-primary">File a Complaint</a>
+        <a href="explore.html" class="btn-secondary">Learn More</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="stats-strip">
+    <div class="stat-item"><strong>100%</strong><span>Confidential</span></div>
+    <div class="stat-divider"></div>
+    <div class="stat-item"><strong>Direct</strong><span>To the Right Authority</span></div>
+    <div class="stat-divider"></div>
+    <div class="stat-item"><strong>Real-time</strong><span>Status Tracking</span></div>
+    <div class="stat-divider"></div>
+    <div class="stat-item"><strong>Secure</strong><span>Report Handling</span></div>
+  </section>
+
+  <footer class="footer-bar">© 2024 VoiceIT · Technological Institute of the Philippines</footer>
+
+  <script>
+    const hamburger = document.getElementById('hamburger');
+    const dropdown = document.getElementById('mobileDropdown');
+    hamburger.addEventListener('click', () => {
+      hamburger.classList.toggle('open');
+      dropdown.classList.toggle('open');
+    });
+    document.addEventListener('click', (e) => {
+      if (!hamburger.contains(e.target) && !dropdown.contains(e.target)) {
+        hamburger.classList.remove('open');
+        dropdown.classList.remove('open');
+      }
+    });
+  </script>
+</body>
+</html>

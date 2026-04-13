@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Candal&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="css/aboutus.css">
+  <title>VoiceIT | About Us</title>
+</head>
+<body>
+
+  <header class="navbar">
+    <a href="index.html" class="logo">
+      <img src="visuals/navlogo.gif" alt="VoiceIT">
+    </a>
+    <nav class="nav-links">
+      <a href="index.html">Home</a>
+      <a href="explore.html">Explore</a>
+      <a href="aboutus.html" class="active">About Us</a>
+      <a href="registerlogin.php" class="login-btn">Log In</a>
+    </nav>
+    <button class="hamburger" id="hamburger" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
+    <div class="mobile-dropdown" id="mobileDropdown">
+      <a href="index.html">Home</a>
+      <a href="explore.html">Explore</a>
+      <a href="aboutus.html" class="active">About Us</a>
+      <a href="registerlogin.php" class="mobile-login-btn">Log In</a>
+    </div>
+  </header>
+
+  <div class="about-body">
+    <aside class="about-image">
+      <img src="visuals/schoolbg.jpeg" alt="School Campus">
+    </aside>
+    <main class="about-content">
+      <div class="about-block">
+        <h2>About Our Project</h2>
+        <p>VoiceIT is designed to provide students with a structured and accessible way to report issues affecting their academic and campus life. By categorizing concerns into academic and non-academic sections, it ensures that every report is directed to the appropriate authority for timely and effective resolution.</p>
+        <p>The platform serves as a bridge between students and administrators, promoting transparency, accountability, and responsiveness within the school community. Each submission is handled with confidentiality and care, encouraging students to speak up without fear.</p>
+        <p>VoiceIT aims to foster a culture of open communication and continuous improvement. By empowering students to share their experiences, it contributes to a safer, more inclusive, and student-centered educational environment.</p>
+      </div>
+      <div class="about-block">
+        <h2>Contact Us</h2>
+        <div class="contact-list">
+          <div class="contact-item">
+            <i class="fas fa-envelope"></i>
+            <span>voiceitsystem@gmail.com</span>
+          </div>
+          <div class="contact-item">
+            <i class="fas fa-map-marker-alt"></i>
+            <span>Technological Institute of the Philippines, Manila</span>
+          </div>
+        </div>
+        <div class="social-links">
+          <a href="#" title="Facebook"><i class="fab fa-facebook-f"></i></a>
+          <a href="#" title="Twitter"><i class="fab fa-twitter"></i></a>
+          <a href="#" title="Instagram"><i class="fab fa-instagram"></i></a>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <script>
+    const hamburger = document.getElementById('hamburger');
+    const dropdown = document.getElementById('mobileDropdown');
+    hamburger.addEventListener('click', () => {
+      hamburger.classList.toggle('open');
+      dropdown.classList.toggle('open');
+    });
+    document.addEventListener('click', (e) => {
+      if (!hamburger.contains(e.target) && !dropdown.contains(e.target)) {
+        hamburger.classList.remove('open');
+        dropdown.classList.remove('open');
+      }
+    });
+  </script>
+</body>
+</html>

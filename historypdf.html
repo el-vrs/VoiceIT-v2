@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Complaint History Report</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      padding: 30px;
+      background-color: #fff;
+    }
+    h1 {
+      text-align: center;
+      margin-bottom: 30px;
+      font-size: 24px;
+      color: #003f66;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 14px;
+    }
+    th, td {
+      border: 1px solid #999;
+      padding: 10px;
+      text-align: left;
+      vertical-align: top;
+    }
+    th {
+      background-color: #f2f2f2;
+      color: #003f66;
+    }
+    .no-data {
+      text-align: center;
+      margin-top: 50px;
+      font-style: italic;
+      color: #888;
+    }
+  </style>
+</head>
+<body>
+  <h1>Complaint History</h1>
+  <div id="pdfContent"></div>
+
+  <script>
+    const reports = JSON.parse(localStorage.getItem('userReports')) || [];
+
+    if (reports.length === 0) {
+      document.getElementById('pdfContent').innerHTML = '<div class="no-data">No complaints submitted yet.</div>';
+    } else {
+      let html = '<table>';
+      html += `
+        <tr>
+          <th>#</th>
+          <th>Subject</th>
+          <th>Description</th>
+          <th>Category</th>
+          <th>Status</th>
+          <th>Date</th>
+          <th>Solution</th>
+        </tr>
+      `;
+
+      reports.forEach((report, index) => {
+        html += `
+          <tr>
+            <td>${index + 1}</td>
+            <td>${report.subject}</td>
+            <td>${report.description}</td>
+            <td>${report.category}</td>
+            <td>${report.status}</td>
+            <td>${report.dateFormatted}</td>
+            <td>${report.solution}</td>
+          </tr>
+        `;
+      });
+
+      html += '</table>';
+      document.getElementById('pdfContent').innerHTML = html;
+    }
+  </script>
+</body>
+</html>
